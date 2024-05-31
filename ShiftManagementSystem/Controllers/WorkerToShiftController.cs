@@ -2,15 +2,18 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ShiftManagementSystem.Models;
+using ShiftManagementSystem.Services;
 
 namespace ShiftManagementSystem.Controllers
 {
     public class WorkerToShiftController : Controller
     {
         private readonly ShiftManagementCoreDbContext _db;
-        public WorkerToShiftController(ShiftManagementCoreDbContext db)
+        private readonly IEmailServices _emailService;
+        public WorkerToShiftController(ShiftManagementCoreDbContext db, IEmailServices emailServices)
         {
             _db = db;
+            _emailService = emailServices;  
         }
 
 
@@ -73,6 +76,31 @@ namespace ShiftManagementSystem.Controllers
             }).ToList();
 
             return View(viewModel);
+        }
+
+        public IActionResult SendEmail(int workerId, int shiftId)
+        {
+            var worker = _db.Workers.FirstOrDefault(w => w.Id == workerId);
+            var shift = _db.Shifts.FirstOrDefault(s => s.Id == shiftId);
+
+            if (worker != null && shift != null)
+            {
+                var subject = "Shift Assignment Notification";
+                var body = $"Hello {worker.Email},<br/><br/>You are assigned to the {shift.Name} shift.<br/><br/>Best regards,<br/>Shift Management System";
+
+                bool emailSent = _emailService.SendEmail(worker.Email, subject, body);
+
+                if (emailSent)
+                {
+                    ViewData["Message"] = "Email sent successfully.";
+                }
+                else
+                {
+                    ViewData["Message"] = "Failed to send email.";
+                }
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

@@ -5,6 +5,16 @@
 }
 
 <h1>@ViewData["Title"]</h1>
+@if (ViewData["Message"] != null)
+{
+    <div class="alert alert-info">
+        @ViewData["Message"]
+    </div>
+}
+
+ <h3 class="btn btn-primary" style="background-color: #5a8dee; color: white;">
+                    <a href="@Url.Action("AssignUser", "WorkerToShift")" style="color: white;">Add Shift</a>
+       </h3>
 
 <table class="table">
     <thead>
