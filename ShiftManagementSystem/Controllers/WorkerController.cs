@@ -32,22 +32,29 @@ namespace ShiftManagementSystem.Controllers
         [HttpPost]
         public ActionResult AddWorker(Worker worker)
         {
-            if (worker.Id == 0)
+            if (ModelState.IsValid)
             {
-                _db.Workers.Add(worker);
+                if (worker.Id == 0)
+                {
+                    _db.Workers.Add(worker);
+                }
+                else
+                {
+                    Worker existingWorker = _db.Workers.Find(worker.Id);
+                    if (existingWorker != null)
+                    {
+                        existingWorker.Name = worker.Name;
+                        existingWorker.Email = worker.Email;
+                        existingWorker.PhoneNumber = worker.PhoneNumber;
+                    }
+                }
+                _db.SaveChanges();
+                return RedirectToAction("Index");
             }
             else
             {
-                Worker existingWorker = _db.Workers.Find(worker.Id);
-                if (existingWorker != null)
-                {
-                    existingWorker.Name = worker.Name;
-                    existingWorker.Email = worker.Email;
-                    existingWorker.PhoneNumber = worker.PhoneNumber;
-                }
+                return View(worker);
             }
-            _db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         public ActionResult DeleteWorker(int id)

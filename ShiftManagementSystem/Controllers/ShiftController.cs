@@ -64,12 +64,6 @@ namespace ShiftManagementSystem.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult SendInvitations(int id)
-        {
-            var shift = _db.Shifts.Find(id);
-            var workers = _db.Workers.ToList();
-            // Send email invitations to selected workers
-            return RedirectToAction("Index");
-        }
+ 
     }
 }
