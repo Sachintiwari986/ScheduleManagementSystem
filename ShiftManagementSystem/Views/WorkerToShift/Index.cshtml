@@ -1,0 +1,29 @@
+﻿@model List<ShiftManagementSystem.Models.WorkerToShift>
+
+@{
+    ViewData["Title"] = "Worker-Shift Assignments";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Worker</th>
+            <th>Shift</th>
+            <th>Email Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var assignment in Model)
+        {
+            <tr>
+                <td>@assignment.Worker.Email</td>
+                <td>@assignment.Shift.Name</td>
+                <td>
+                    <a asp-action="SendEmail" asp-route-workerId="@assignment.WorkerId" asp-route-shiftId="@assignment.ShiftId">Send Email</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

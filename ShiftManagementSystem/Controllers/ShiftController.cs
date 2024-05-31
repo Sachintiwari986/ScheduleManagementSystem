@@ -41,6 +41,7 @@ namespace ShiftManagementSystem.Controllers
                 Shift existingShift = _db.Shifts.Find(shift.Id);
                 if (existingShift != null)
                 {
+                    existingShift.Name = shift.Name;
                     existingShift.Date = shift.Date;
                     existingShift.Time = shift.Time;
                     existingShift.Location = shift.Location;

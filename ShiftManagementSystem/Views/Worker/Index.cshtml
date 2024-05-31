@@ -21,7 +21,6 @@
 					<td>@worker.Name</td>
 					<td>@worker.Email</td>
 					<td>@worker.PhoneNumber</td>
-		
 					<td>
 						@Html.ActionLink("Edit", "AddWorker", new { id = worker.Id }, new { @class = "btn btn-primary btn-sm" })
 						@Html.ActionLink("Delete", "DeleteWorker", new { id = worker.Id }, new { @class = "btn btn-danger btn-sm", onclick = "return confirm('Are you sure you want to delete this worker?');" })

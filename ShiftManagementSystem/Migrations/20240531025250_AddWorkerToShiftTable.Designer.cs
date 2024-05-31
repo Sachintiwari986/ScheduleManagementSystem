@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShiftManagementSystem.Models;
 
@@ -11,9 +12,10 @@ using ShiftManagementSystem.Models;
 namespace ShiftManagementSystem.Migrations
 {
     [DbContext(typeof(ShiftManagementCoreDbContext))]
-    partial class ShiftManagementCoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240531025250_AddWorkerToShiftTable")]
+    partial class AddWorkerToShiftTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,10 +36,6 @@ namespace ShiftManagementSystem.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Location")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -97,30 +95,7 @@ namespace ShiftManagementSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ShiftId");
-
-                    b.HasIndex("WorkerId");
-
                     b.ToTable("WorkerToShifts");
-                });
-
-            modelBuilder.Entity("ShiftManagementSystem.Models.WorkerToShift", b =>
-                {
-                    b.HasOne("ShiftManagementSystem.Models.Shift", "Shift")
-                        .WithMany()
-                        .HasForeignKey("ShiftId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ShiftManagementSystem.Models.Worker", "Worker")
-                        .WithMany()
-                        .HasForeignKey("WorkerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Shift");
-
-                    b.Navigation("Worker");
                 });
 #pragma warning restore 612, 618
         }

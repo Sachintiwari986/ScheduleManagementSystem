@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShiftManagementSystem.Models;
 
@@ -11,9 +12,10 @@ using ShiftManagementSystem.Models;
 namespace ShiftManagementSystem.Migrations
 {
     [DbContext(typeof(ShiftManagementCoreDbContext))]
-    partial class ShiftManagementCoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240531044414_UpdatingWorkerToshift")]
+    partial class UpdatingWorkerToshift
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,10 +36,6 @@ namespace ShiftManagementSystem.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Location")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

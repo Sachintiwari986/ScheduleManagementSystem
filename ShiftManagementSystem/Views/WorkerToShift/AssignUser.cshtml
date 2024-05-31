@@ -1,0 +1,34 @@
+﻿
+@model ShiftManagementSystem.Models.WorkerToShiftViewModel
+
+@{
+    ViewData["Title"] = "Assign Worker to Shift";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>Worker to Shift</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AssignUser">
+            <div class="form-group">
+                @Html.HiddenFor(x=>x.Workers)
+                @Html.HiddenFor(x=>x.Shifts)
+                <label asp-for="WorkerId" class="control-label">Worker</label>
+                <select asp-for="WorkerId" class="form-control" asp-items="Model.Workers"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShiftId" class="control-label">Shift</label>
+                <select asp-for="ShiftId" class="form-control" asp-items="Model.Shifts"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
