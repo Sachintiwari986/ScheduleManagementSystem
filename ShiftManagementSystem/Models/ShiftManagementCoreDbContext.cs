@@ -10,6 +10,7 @@ namespace ShiftManagementSystem.Models
         public DbSet<Shift> Shifts { get; set; }    
         public DbSet<Worker> Workers { get; set; }    
         public DbSet<WorkerToShift> WorkerToShifts { get; set; }    
+        public DbSet<UserDataModel> Users { get; set; }    
 
     }
 }
