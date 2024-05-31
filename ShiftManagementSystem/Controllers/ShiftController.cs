@@ -52,7 +52,6 @@ namespace ShiftManagementSystem.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
         public IActionResult DeleteShift(int id)
         {
             Shift shift = _db.Shifts.Find(id);

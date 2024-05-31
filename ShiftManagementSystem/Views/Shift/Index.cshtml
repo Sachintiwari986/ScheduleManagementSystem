@@ -34,29 +34,3 @@
 		</tbody>
 	</table>
 </div>
-
-
-@*<div class="container">
-	<h2>Shift List</h2>
-	<div class="panel panel-default">
-		<div class="panel-heading">Shift List</div>
-		<div class="panel-body">
-			@foreach (var shift in Model)
-			{
-				<div class="panel panel-default">
-					<div class="panel-heading">@shift.Date.ToString("MM/dd/yyyy")</div>
-					<div class="panel-body">
-						<p>Time: @shift.Time.ToString("hh:mm tt")</p>
-						<p>Location: @shift.Location</p>
-						<p>Task: @shift.Task</p>
-						<p>Rate: @shift.Rate</p>
-						<p>
-							@Html.ActionLink("Edit", "Edit", new { id = shift.Id }, new { @class = "btn btn-primary btn-sm" })
-							@Html.ActionLink("Delete", "Delete", new { id = shift.Id }, new { @class = "btn btn-danger btn-sm" })
-						</p>
-					</div>
-				</div>
-			}
-		</div>
-	</div>
-</div>*@
